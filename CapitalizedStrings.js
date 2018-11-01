@@ -35,3 +35,29 @@ function order2(words){
       return a.match(/\d/) - b.match(/\d/);
    }).join(' ');
 }    
+
+
+function deleteNth(arr,n){
+  var occurances = arr.reduce((acc, current) => {
+     acc[current] ? acc[current]++ : acc[current]=1;
+     return acc;
+  }, {}
+  );
+  
+  var result = [];
+
+  arr.forEach(el => {
+    if(occurances[el]>n){
+      occurances[el]=n;
+    }
+    if(occurances[el]>0){
+      result.push(el);
+      occurances[el]--;
+    }
+  });
+  
+  return result;
+}
+
+var elems = deleteNth([20,37,20,21], 1); // [20,37,21]
+console.log('Delete n array: '+ elems);
